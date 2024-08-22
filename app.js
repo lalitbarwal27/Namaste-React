@@ -23,6 +23,26 @@ const parent = React.createElement(
   )]
 );
 
+console.log(parent)
 
+const jsxHeading=<h1>This is JSx Heading</h1>
+
+console.log(jsxHeading)
+
+const Title =() => (
+  <h1>THis is title bro</h1>
+)
+
+//fucntional component 
+
+const HeadingComponent = () =>(
+  <div id="container">
+    <Title>
+    </Title>
+    <Title/>
+    {Title()}
+    <h1>This is functional component </h1>
+  </div>
+)
 const root=ReactDOM.createRoot(document.getElementById('root'))
-root.render(parent)
+root.render(<HeadingComponent/>)
