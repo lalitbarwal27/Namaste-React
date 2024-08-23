@@ -1,3 +1,40 @@
-#heading{
-    color: red;
+.header{
+    display: flex;  
+    justify-content: space-between; 
+    border: 1px solid black;
+}
+
+.logo{
+    width: 200px;
+}
+
+.navItems > ul {
+    display: flex;
+    padding: 10px;
+}
+
+.navItems > ul >li {
+    font-size: 24px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.cardContainer{
+    width: 250px;
+    height: 400px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+}
+.restImage{
+    width: 220px;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cardContainer > h4 {
+    line-height:0.5px;
 }
