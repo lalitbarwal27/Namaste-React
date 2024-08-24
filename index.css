@@ -17,6 +17,7 @@
     font-size: 24px;
     padding: 5px;
     margin: 10px;
+    cursor: pointer;
 }
 
 .cardContainer{
@@ -64,5 +65,5 @@
 
 .login{
     cursor: pointer;
-    
+
 }

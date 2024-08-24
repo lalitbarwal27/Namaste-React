@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import restaurantData from "../resturant.json";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import AboutUs from "./components/AboutUs";
+import ContactUs from "./components/ContactUs";
+import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 // const parent = React.createElement(
 //   "div",
@@ -30,10 +34,36 @@ const App = () => {
   return (
     <div className="mainContainer">
       <Header />
-      <Body />
+      <Outlet />
     </div>
   );
 };
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    errorElement: <Error />,
+    children: [
+      {
+        path: "/aboutUs",
+        element: <AboutUs />,
+      },
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactUs />,
+      },
+      {
+        path: "/restaurants/:resId",
+        element: <RestaurantMenu />,
+      },
+    ],
+    element: <App />,
+  },
+]);
 
 // const HeadingComponent = () => (
 //   <div id="container">
@@ -44,4 +74,4 @@ const App = () => {
 //   </div>
 // );
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<RouterProvider router={appRouter} />);
