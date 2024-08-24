@@ -36,5 +36,33 @@
 }
 
 .cardContainer > h4 {
-    line-height:0.5px;
+       line-height:0.5px;
+}
+
+.filter{
+    margin: 5px;
+    display: flex;
+}
+
+.filter-search{
+    margin: 5px;
+}
+
+.shimmer-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-card{
+    width: 250px;
+    height: 400px;
+    background-color: #f0f0f0;
+    margin:10px ;
+    padding: 10px;
+
+}
+
+.login{
+    cursor: pointer;
+    
 }
