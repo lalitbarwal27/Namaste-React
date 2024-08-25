@@ -1,12 +1,16 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import AboutUs from "./components/AboutUs";
-import ContactUs from "./components/ContactUs";
+// import AboutUs from "./components/AboutUs";
+// import ContactUs from "./components/ContactUs";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+
+const AboutUs = lazy(() => import("./components/AboutUs"));
+
+const ContactUs = lazy(() => import("./components/ContactUs"));
 
 // const parent = React.createElement(
 //   "div",
@@ -46,7 +50,11 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/aboutUs",
-        element: <AboutUs />,
+        element: (
+          <Suspense fallback={<h2>....loading</h2>}>
+            <AboutUs />
+          </Suspense>
+        ),
       },
       {
         path: "/",
@@ -54,7 +62,12 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/contactUs",
-        element: <ContactUs />,
+        element: (
+          <Suspense fallback={<h2>....loading</h2>}>
+            {" "}
+            <ContactUs />
+          </Suspense>
+        ),
       },
       {
         path: "/restaurants/:resId",
