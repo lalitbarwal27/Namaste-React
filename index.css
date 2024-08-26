@@ -40,9 +40,7 @@
     flex-wrap: wrap;
 }
 
-.cardContainer > h4 {
-       line-height:0.5px;
-}
+
 
 .filter{
     margin: 5px;

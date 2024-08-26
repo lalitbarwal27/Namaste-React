@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,7 @@ import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 // import ContactUs from "./components/ContactUs";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/userContext";
 
 const AboutUs = lazy(() => import("./components/AboutUs"));
 
@@ -26,8 +27,6 @@ const ContactUs = lazy(() => import("./components/ContactUs"));
 //   )]
 // );
 
-console.log(parent);
-
 const jsxHeading = <h1>This is JSx Heading</h1>;
 
 console.log(jsxHeading);
@@ -35,11 +34,18 @@ console.log(jsxHeading);
 const Title = () => <h1>THis is title bro</h1>;
 
 const App = () => {
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    setUserName("Lalit Barwal");
+  }, []);
+
   return (
-    <div className="mainContainer">
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="mainContainer">
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 

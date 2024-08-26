@@ -1,9 +1,10 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { restaurantData } from "../utils/mockData";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/userContext";
 
 const Body = () => {
   //destructing the array on the fly
@@ -11,6 +12,8 @@ const Body = () => {
   const [filteredRestaurant, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+
+  const { loggedInUser, setUserName } = useContext(UserContext);
 
   useEffect(() => {
     fetchData();
@@ -31,6 +34,9 @@ const Body = () => {
     setFilteredRestaurants(
       res?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    console.log(
+      res?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   if (onlineStatus === false) {
@@ -38,6 +44,8 @@ const Body = () => {
       <h2>Looks like you internet is gone. Please chekc and try agaian</h2>
     );
   }
+
+  const RestrauntWithLabel = withPromotedLabel(RestaurantCard);
 
   const filterAbove4 = () => {
     let filtered = availableRestaurat.filter(
@@ -72,12 +80,22 @@ const Body = () => {
         <button className="filterButton" onClick={filterAbove4}>
           Filter Restaurants
         </button>
+
+        <input
+          type="text"
+          className="border-2 border-black"
+          onChange={(e) => setUserName(e.target.value)}
+          value={loggedInUser}
+        />
       </div>
       <div className="container">
         {filteredRestaurant.map((rest) => (
-          <Link to={`/restaurants/${rest.info.id}`}>
-            {" "}
-            <RestaurantCard key={rest.info.id} restData={rest} />
+          <Link key={rest.info.id} to={`/restaurants/${rest.info.id}`}>
+            {rest.info.isOpen ? (
+              <RestrauntWithLabel restData={rest} />
+            ) : (
+              <RestaurantCard restData={rest} />
+            )}
           </Link>
         ))}
       </div>
