@@ -3,12 +3,17 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [loggedState, setLoggedState] = useState("Login");
   const onlineStatus = useOnlineStatus();
 
   const { loggedInUser } = useContext(UserContext);
+
+  const cart = useSelector((store) => store.cart.item);
+
+  console.log(cart, "this is cart");
   return (
     <div className="header">
       <div className="logoContainer">
@@ -26,7 +31,10 @@ const Header = () => {
           <li>
             <Link to={"/contactUs"}>Contact Us</Link>
           </li>
-          <li>Cart</li>
+          <li>
+            {" "}
+            <Link to={"/cart"}>Cart{cart.length}</Link>
+          </li>
           <button
             className="login"
             onClick={() =>

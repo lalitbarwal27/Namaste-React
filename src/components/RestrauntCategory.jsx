@@ -1,11 +1,18 @@
 import React from "react";
 import { CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { addCartData } from "../utils/cartSlice";
 
 const RestrauntCategory = (props) => {
+  const dispatch = useDispatch();
   const data =
     props.item.card.card.itemCards ?? props.item.card.card?.categories;
 
   const { setShowIndex, index, show } = props;
+
+  const addToCart = (item) => {
+    dispatch(addCartData(item));
+  };
 
   return (
     <div className="w-1/3 shadow-md mx-auto bg-gray-100 m-3 p-3">
@@ -33,7 +40,10 @@ const RestrauntCategory = (props) => {
           {data?.length > 0 &&
             data?.map((item) => {
               return (
-                <div className="flex border-b-2 pb-4">
+                <div
+                  className="flex border-b-2 pb-4"
+                  onClick={() => addToCart(item)}
+                >
                   {" "}
                   <img
                     className="w-20 h-16  m-2 p-2"
