@@ -13,7 +13,6 @@ const Header = () => {
 
   const cart = useSelector((store) => store.cart.item);
 
-  console.log(cart, "this is cart");
   return (
     <div className="header">
       <div className="logoContainer">
